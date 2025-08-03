@@ -112,6 +112,7 @@
         margin: 0.5rem 1rem;
       }
 
+      /* Patched carousel styling */
       #carouselHero {
         max-width: 1600px;
         margin-left: auto;
@@ -119,28 +120,28 @@
         border-radius: 8px;
         overflow: hidden;
         margin-top: 1.5rem;
+        background-color: #f0f2f5; /* blends letterbox space */
+      }
+
+      .carousel-inner {
+        /* height determined by image */
       }
 
       .carousel-item img {
-        object-fit: contain;
+        display: block;
         width: 100%;
-        height: 250px;
-        background-color: #fff;
+        height: auto;
+        object-fit: contain; /* show full image on desktop */
+        background-color: #f0f2f5;
       }
 
-      @media (min-width: 768px) {
-        .carousel-item img {
-          height: 400px;
-        }
-      }
-
-      @media (min-width: 992px) {
-        .carousel-item img {
-          height: 500px;
-        }
-      }
-
+      /* On smaller screens use cover to avoid excessive empty space */
       @media (max-width: 991.98px) {
+        .carousel-item img {
+          height: 250px;
+          object-fit: cover;
+        }
+
         .navbar-collapse {
             margin-top: 10px;
             background: rgba(255, 255, 255, 0.8);
