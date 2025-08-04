@@ -111,8 +111,6 @@
         width: calc(100% - 2rem);
         margin: 0.5rem 1rem;
       }
-
-      /* Patched carousel styling */
       #carouselHero {
         max-width: 1600px;
         margin-left: auto;
@@ -120,22 +118,19 @@
         border-radius: 8px;
         overflow: hidden;
         margin-top: 1.5rem;
-        background-color: #f0f2f5; /* blends letterbox space */
+        background-color: #f0f2f5;
       }
 
       .carousel-inner {
-        /* height determined by image */
       }
 
       .carousel-item img {
         display: block;
         width: 100%;
         height: auto;
-        object-fit: contain; /* show full image on desktop */
+        object-fit: contain;
         background-color: #f0f2f5;
       }
-
-      /* On smaller screens use cover to avoid excessive empty space */
       @media (max-width: 991.98px) {
         .carousel-item img {
           height: 250px;
@@ -163,8 +158,6 @@
 
 <body>
   <div class="container px-3 px-md-5">
-
-    <!-- ✅ Updated header -->
     <header class="py-3">
       <div class="d-flex align-items-center">
         <img src="logo.png" alt="Logo" style="height: 100px; width: auto; margin-right: 20px;">
@@ -278,6 +271,7 @@
 </body>
 
 </html>
+
 
 
 
