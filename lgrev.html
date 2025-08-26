@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theatre Curtain Reveal with Ribbons</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* No scrollbars */
+      background: #111;
+      font-family: Arial, sans-serif;
+    }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #111;
+      overflow: hidden;
+    }
+
+    /* Logo */
+    .logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 1s ease;
+      z-index: 1;
+    }
+
+    .logo img {
+      width: 400px;  /* adjust logo size here */
+      height: auto;
+    }
+
+    /* Curtains */
+    .curtain {
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to right,
+        #a00000,
+        #c10000 10px,
+        #a00000 20px
+      );
+      box-shadow: inset -10px 0 25px rgba(0,0,0,0.6);
+      z-index: 2;
+      transition: transform 2s ease-in-out;
+    }
+
+    .left {
+      left: 0;
+      transform-origin: left center;
+      transform: translateX(0) rotateY(0);
+    }
+
+    .right {
+      right: 0;
+      transform-origin: right center;
+      transform: translateX(0) rotateY(0);
+    }
+
+    /* Ribbons */
+    .ribbon {
+      position: absolute;
+      top: 50%;
+      height: 30px;
+      width: 100%;
+      background: linear-gradient(to bottom, #ff4444, #cc0000);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 5px rgba(0,0,0,0.6);
+      transform: translateY(-50%);
+      transition: transform 1s ease, opacity 0.5s ease;
+      z-index: 3;
+    }
+
+    /* Small knot in the middle */
+    .ribbon::before {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background: radial-gradient(circle, #ff6666, #aa0000);
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+
+    .left .ribbon { left: 0; }
+    .right .ribbon { right: 0; }
+
+    /* Top swag curtain */
+    .top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 20%;
+      background: radial-gradient(circle at top, #c10000, #800000 70%);
+      border-radius: 0 0 50% 50%;
+      z-index: 4;
+    }
+
+    /* Animate ribbons sliding away */
+    .stage.ribbons-off .left .ribbon {
+      transform: translate(-200%, -50%);
+      opacity: 0;
+    }
+    .stage.ribbons-off .right .ribbon {
+      transform: translate(200%, -50%);
+      opacity: 0;
+    }
+
+    /* Curtains open */
+    .stage.revealed .left {
+      transform: translateX(-100%) rotateY(25deg);
+    }
+    .stage.revealed .right {
+      transform: translateX(100%) rotateY(-25deg);
+    }
+
+    /* Logo fade in */
+    .stage.show-logo .logo {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+    </div>
+
+    <!-- Curtains with ribbons -->
+    <div class="curtain left"><div class="ribbon"></div></div>
+    <div class="curtain right"><div class="ribbon"></div></div>
+
+    <!-- Top swag curtain -->
+    <div class="top"></div>
+  </div>
+
+  <script>
+    function startReveal() {
+      const stage = document.querySelector('.stage');
+
+      // Step 1: Ribbons slide off
+      stage.classList.add('ribbons-off');
+
+      // Step 2: Curtains open after ribbons move
+      setTimeout(() => {
+        stage.classList.add('revealed');
+      }, 1000);
+
+      // Step 3: Show logo
+      setTimeout(() => {
+        stage.classList.add('show-logo');
+      }, 2500);
+    }
+
+    // Press Enter to reveal
+    document.addEventListener('keydown', function(event) {
+      if (event.key === "Enter") {
+        startReveal();
+      }
+    });
+  </script>
+</body>
+</html>
